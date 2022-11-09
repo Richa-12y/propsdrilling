@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ChildOneContext } from "../App";
+import Cart from "./Cart";
+import { childContext } from "./ChildTwo";
 
-const ChildThree = ({ fName, lName, handleClickOne, handleClickTwo }) => {
+const ChildThree = () => {
+  const { data } = useContext(ChildOneContext);
+  const result = useContext(childContext);
+  console.log(data);
+  console.log(result);
+
   return (
     <>
-      <div>This is ChildThree Component.</div>
-      <div>{fName}</div>
-      <div>{lName}</div>
-      <button onClick={() => handleClickOne("Hello from ChildThree")}>
-        ChildThree
-      </button>
-      <button onClick={() => handleClickTwo("Hii from ChildThree")}>
-        ChildThree
-      </button>
+      {data.map((el, i) => {
+        return (
+          <Cart
+            onClick={() => console.log(el.heading)}
+            name={el.heading}
+            src={el.img}
+          />
+        );
+      })}
     </>
   );
 };

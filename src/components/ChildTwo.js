@@ -1,22 +1,17 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
+import { ChildOneContext } from "../App";
 import ChildThree from "./ChildThree";
 
-const ChildTwo = ({ fName, lName, handleClickOne, handleClickTwo }) => {
+export const childContext = createContext();
+const ChildTwo = () => {
+  const { title } = useContext(ChildOneContext);
+
   return (
     <div>
-      <div>This is ChildTwo Component.</div>
-      <ChildThree
-        fName={fName}
-        lName={lName}
-        handleClickOne={handleClickOne}
-        handleClickTwo={handleClickTwo}
-      />
-      <button onClick={() => handleClickOne("Hello from ChildTwo")}>
-        Childtwo
-      </button>
-      <button onClick={() => handleClickTwo("Hii from ChildTwo")}>
-        Childtwo
-      </button>
+      {title}
+      <childContext.Provider value="hey context inside componet">
+        <ChildThree />
+      </childContext.Provider>
     </div>
   );
 };
